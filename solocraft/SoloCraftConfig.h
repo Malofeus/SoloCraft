@@ -8,11 +8,6 @@ class SolocraftConfig
 {
     public:
         SolocraftConfig();
-        /* static SolocraftConfig& instance()
-        {
-            static SolocraftConfig instance;
-            return instance;
-        }*/
  
         bool Initialize();
 

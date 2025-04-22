@@ -2,6 +2,7 @@
 
 #include "solocraft/SoloCraftConfig.h"
 
+#include "Globals/ObjectMgr.h"
 #include "Entities/ObjectGuid.h"
 #include "Entities/Player.h"
 #include "Maps/Map.h"
@@ -28,15 +29,17 @@ class Solocraft
 
     private:
         SolocraftConfig sSolocraftConfig;
-	    std::map<ObjectGuid, int> _unitDifficulty;
-        std::map<ObjectGuid, int> _unitBuff;
+	    std::map<ObjectGuid, uint32> _unitDifficulty;
+        std::map<ObjectGuid, uint32> _unitBuff;
         
+        uint32 CalculateDungeonlevel(Map* map);
         float CalculateDifficulty(Map* map);
         uint32 GetNumInGroup(Player* payer);
+        uint32 GetClassBalance(Player* player);
         void ClearBuffs(Player* player, Map* map);
         void ClearBuffs(Player* player);
-        void ApplyBuffs(Player* player, Map* map, int difficulty, int numInGroup);
-        void ApplyBuffs(Player* player, int multiplier);
+        void ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float difficulty, uint32 numInGroup, uint32 classBalance);
+        void ApplyBuffs(Player* player, uint32 multiplier);
 };
 
 #define sSolocraft MaNGOS::Singleton<Solocraft>::Instance()

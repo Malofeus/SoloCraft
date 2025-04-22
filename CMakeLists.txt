@@ -26,7 +26,7 @@ if ( ${CMAKE_PROJECT_NAME} MATCHES "TBC")
 endif()
 if ( ${CMAKE_PROJECT_NAME} MATCHES "WoTLK")
   add_definitions(-DSOLOCRAFT_TBC)
-  add_definitions(-DSOLOCRAFT_WoTLK)
+  add_definitions(-DSOLOCRAFT_WOTLK)
 endif()
 
 if(PCH)
