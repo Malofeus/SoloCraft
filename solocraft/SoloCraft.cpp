@@ -103,7 +103,7 @@ float Solocraft::CalculateDifficulty(Map* map)
 
 uint32 Solocraft::CalculateDungeonlevel(Map* map)
 {
-    if (sSolocraftConfig.dungeons.find(map-GetId()) == sSolocraftConfig.dungeons.end())
+    if (sSolocraftConfig.dungeons.find(map->GetId()) == sSolocraftConfig.dungeons.end())
         return sSolocraftConfig.SolocraftDungeonLevel;
     else
         return sSolocraftConfig.dungeons[map->GetId()];
@@ -162,7 +162,7 @@ void Solocraft::ClearBuffs(Player* player, Map* map)
         player->SetHealth(player->GetMaxHealth());
 
         // Spellcaster Stat modify
-        if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
+        if (player->GetPowerType() == POWER_MANA || player->getClass() == CLASS_DRUID)
         {
             // Buff the player's mana
             player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
@@ -218,7 +218,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
             player->SetHealth(player->GetMaxHealth());
 
             // Spellcaster Stat modify
-            if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
+            if (player->GetPowerType() == POWER_MANA || player->getClass() == CLASS_DRUID)
             {
                 // Buff the player's mana
                 player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
