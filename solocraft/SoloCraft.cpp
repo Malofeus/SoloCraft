@@ -199,7 +199,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
 
             if (sSolocraftConfig.SoloCraftAnnounceModule)
             {
-                ChatHandler(player->GetSession()).PSendSysMessage("Entered %s (difficulty = %d, numInGroup = %f)",
+                ChatHandler(player->GetSession()).PSendSysMessage("Entered %s (difficulty = %f, numInGroup = %d)",
                         map->GetMapName(), difficulty, numInGroup);
             }
 
