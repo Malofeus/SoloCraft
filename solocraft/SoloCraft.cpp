@@ -161,12 +161,6 @@ void Solocraft::ClearBuffs(Player* player, Map* map)
         // Defined in Unit.h line 1524
         player->SetHealth(player->GetMaxHealth());
 
-        if (player->isExistPet())
-        {
-            // set Pet Health
-            player->CastSpell(player, 692, true);
-        }
-
         // Spellcaster Stat modify
         if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
         {
@@ -222,12 +216,6 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
             // Set player health
             // Defined in Unit.h line 1524
             player->SetHealth(player->GetMaxHealth());
-
-            if (player->isExistPet())
-            {
-                // set Pet Health
-                player->CastSpell(player, 692, true);
-            }
 
             // Spellcaster Stat modify
             if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
