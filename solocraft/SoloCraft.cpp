@@ -30,13 +30,13 @@ void Solocraft::OnLogout(Player* player)
 {
     if (sSolocraftConfig.enabled)
     {
-        std::map<ObjectGuid, uint32>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
+        std::map<ObjectGuid, float>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
         if (unitDifficultyIterator != _unitDifficulty.end())
         {
             _unitDifficulty.erase(unitDifficultyIterator);
         }
 
-        std::map<ObjectGuid, uint32>::iterator unitBuffIterator = _unitBuff.find(player->GetObjectGuid());
+        std::map<ObjectGuid, float>::iterator unitBuffIterator = _unitBuff.find(player->GetObjectGuid());
         if (unitBuffIterator != _unitBuff.end())
         {
             _unitBuff.erase(unitBuffIterator);
@@ -64,7 +64,7 @@ float Solocraft::CalculateDifficulty(Map* map)
 {
     if (map)
     {
-#ifdef SOLOCRAFT_TBC || SOLOCRAFT_TBC
+#ifdef SOLOCRAFT_TBC || SOLOCRAFT_WOTLK
 
         if (map->Is25ManRaid())
         {
