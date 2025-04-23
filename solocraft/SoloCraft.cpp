@@ -64,7 +64,7 @@ float Solocraft::CalculateDifficulty(Map* map)
 {
     if (map)
     {
-#ifdef SOLOCRAFT_TBC || SOLOCRAFT_WOTLK
+#if defined(SOLOCRAFT_TBC) || defined(SOLOCRAFT_WOTLK)
 
         if (map->Is25ManRaid())
         {
@@ -148,7 +148,7 @@ void Solocraft::ClearBuffs(Player* player, Map* map)
 
         if (sSolocraftConfig.SoloCraftAnnounceModule)
         {
-            ChatHandler(player->GetSession()).PSendSysMessage("Left to %s (removing difficulty = %d)",
+            ChatHandler(player->GetSession()).PSendSysMessage("Left to %s (removing difficulty = %f)",
                         map->GetMapName(), difficulty);
         }
 
@@ -199,7 +199,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
 
             if (sSolocraftConfig.SoloCraftAnnounceModule)
             {
-                ChatHandler(player->GetSession()).PSendSysMessage("Entered %s (difficulty = %d, numInGroup = %d)",
+                ChatHandler(player->GetSession()).PSendSysMessage("Entered %s (difficulty = %d, numInGroup = %f)",
                         map->GetMapName(), difficulty, numInGroup);
             }
 
