@@ -1,6 +1,7 @@
 #include "solocraft/SoloCraft.h"
 
 #include "Util/Util.h"
+#include "Globals/SharedDefines.h"
 #include "Groups/Group.h"
 #include "Chat/Chat.h"
 
@@ -29,13 +30,13 @@ void Solocraft::OnLogout(Player* player)
 {
     if (sSolocraftConfig.enabled)
     {
-        std::map<ObjectGuid, int>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
+        std::map<ObjectGuid, uint32>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
         if (unitDifficultyIterator != _unitDifficulty.end())
         {
             _unitDifficulty.erase(unitDifficultyIterator);
         }
 
-        std::map<ObjectGuid, int>::iterator unitBuffIterator = _unitBuff.find(player->GetObjectGuid());
+        std::map<ObjectGuid, uint32>::iterator unitBuffIterator = _unitBuff.find(player->GetObjectGuid());
         if (unitBuffIterator != _unitBuff.end())
         {
             _unitBuff.erase(unitBuffIterator);
@@ -139,7 +140,7 @@ uint32 Solocraft::GetClassBalance(Player* player)
 // Resets buffers
 void Solocraft::ClearBuffs(Player* player, Map* map)
 {
-    std::map<ObjectGuid, int>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
+    std::map<ObjectGuid, uint32>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
     if (unitDifficultyIterator != _unitDifficulty.end())
     {
         int difficulty = unitDifficultyIterator->second;
@@ -157,29 +158,31 @@ void Solocraft::ClearBuffs(Player* player, Map* map)
         }
 
         // Set player health
-            // Defined in Unit.h line 1524
-            player->SetFullHealth();
+        // Defined in Unit.h line 1524
+        player->SetHealth(player->GetMaxHealth());
 
-            if (player->isExistPet())
+        if (player->isExistPet())
+        {
+            // set Pet Health
+            player->CastSpell(player, 692, true);
+        }
+
+        // Spellcaster Stat modify
+        if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
+        {
+            // Buff the player's mana
+            player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
+            
+#ifdef SOLOCRAFT_WOTLK
+            // Buff Spellpower
+            // Debuffed characters do not get spellpower
+            if (difficulty > 0)
             {
-                // set Pet Health
-                player->CastSpell(player, 692, true);
+                SpellPowerBonus = static_cast<int>((player->GetBaseSpellPowerBonus() * sSolocraftConfig.SoloCraftSpellMult) * difficulty);
+                player->ApplySpellPowerBonus(SpellPowerBonus, false);
             }
-
-            // Spellcaster Stat modify
-            if (player->GetPowerType() == POWER_MANA || player-getClass() == CLASS_DRUID)
-            {
-                // Buff the player's mana
-                player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-
-                // Buff Spellpower
-                // Debuffed characters do not get spellpower
-                if (difficulty > 0)
-                {
-                    SpellPowerBonus = static_cast<int>((player->GetBaseSpellPowerBonus() * sSolocraftConfig.SoloCraftSpellMult) * difficulty);
-                    player->ApplySpellPowerBonus(SpellPowerBonus, false);
-                }
-            }
+#endif
+        }
     }
 }
 
@@ -218,7 +221,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
 
             // Set player health
             // Defined in Unit.h line 1524
-            player->SetFullHealth();
+            player->SetHealth(player->GetMaxHealth());
 
             if (player->isExistPet())
             {
@@ -232,6 +235,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
                 // Buff the player's mana
                 player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
 
+#ifdef SOLOCRAFT_WOTLK
                 // Buff Spellpower
                 // Debuffed characters do not get spellpower
                 if (difficulty > 0)
@@ -239,6 +243,7 @@ void Solocraft::ApplyBuffs(Player* player, Map* map, uint32 dunLevel, float diff
                     SpellPowerBonus = static_cast<int>((player->GetBaseSpellPowerBonus() * sSolocraftConfig.SoloCraftSpellMult) * difficulty);
                     player->ApplySpellPowerBonus(SpellPowerBonus, true);
                 }
+#endif
             }
         }
     }    

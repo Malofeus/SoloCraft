@@ -50,7 +50,9 @@ bool SolocraftConfig::Initialize()
         {CLASS_MAGE, config.GetIntDefault("SoloCraft.MAGE", 100) },
         {CLASS_WARLOCK, config.GetIntDefault("SoloCraft.WARLOCK", 100) },
         {CLASS_DRUID, config.GetIntDefault("SoloCraft.DRUID", 100) },
+#ifdef SOLOCRAFT_WOTLK
         {CLASS_DEATH_KNIGHT, config.GetIntDefault("SoloCraft.DEATH_KNIGHT", 100) },
+#endif
     };
 
     //Level Thresholds
