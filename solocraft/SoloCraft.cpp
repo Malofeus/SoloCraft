@@ -143,7 +143,7 @@ void Solocraft::ClearBuffs(Player* player, Map* map)
     std::map<ObjectGuid, float>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
     if (unitDifficultyIterator != _unitDifficulty.end())
     {
-        int difficulty = unitDifficultyIterator->second;
+        float difficulty = unitDifficultyIterator->second;
         _unitDifficulty.erase(unitDifficultyIterator);
 
         if (sSolocraftConfig.SoloCraftAnnounceModule)
