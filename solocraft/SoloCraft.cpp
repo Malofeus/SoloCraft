@@ -140,7 +140,7 @@ uint32 Solocraft::GetClassBalance(Player* player)
 // Resets buffers
 void Solocraft::ClearBuffs(Player* player, Map* map)
 {
-    std::map<ObjectGuid, uint32>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
+    std::map<ObjectGuid, float>::iterator unitDifficultyIterator = _unitDifficulty.find(player->GetObjectGuid());
     if (unitDifficultyIterator != _unitDifficulty.end())
     {
         int difficulty = unitDifficultyIterator->second;

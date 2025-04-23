@@ -29,8 +29,8 @@ class Solocraft
 
     private:
         SolocraftConfig sSolocraftConfig;
-	    std::map<ObjectGuid, uint32> _unitDifficulty;
-        std::map<ObjectGuid, uint32> _unitBuff;
+	    std::map<ObjectGuid, float> _unitDifficulty;
+        std::map<ObjectGuid, float> _unitBuff;
         
         uint32 CalculateDungeonlevel(Map* map);
         float CalculateDifficulty(Map* map);
