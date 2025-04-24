@@ -4,6 +4,8 @@
 #include "Globals/SharedDefines.h"
 #include "Log/Log.h"
 
+#include <format>
+
 INSTANTIATE_SINGLETON_1(SolocraftConfig);
 
 SolocraftConfig::SolocraftConfig():enabled(false) { }
