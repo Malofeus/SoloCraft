@@ -11,10 +11,11 @@ SolocraftConfig::SolocraftConfig():enabled(false) { }
 bool SolocraftConfig::Initialize()
 {
     sLog.outString("Initializing Solocraft.");
-
+    sLog.outString(SYSCONFDIR);
     if (!config.SetSource(SYSCONFDIR"SoloCraft.conf", "SoloCraft_"))
     {
 #ifdef _SOLOCRAFT_CONFIG
+        sLog.outString(_SOLOCRAFT_CONFIG);
         if (!config.SetSource(_SOLOCRAFT_CONFIG, "SoloCraft_"))
         {
             sLog.outString("Solocraft is Disabled. Unable to open configuration file solocreaft.conf");
