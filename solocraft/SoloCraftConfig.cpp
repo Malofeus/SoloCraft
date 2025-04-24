@@ -30,7 +30,7 @@ bool SolocraftConfig::Initialize()
     }
     else
     {
-        sLog.outString("Solocraft is running.")
+        sLog.outString("Solocraft is running.");
     }
 
     SoloCraftAnnounceModule = config.GetBoolDefault("Solocraft.Announce", true);
