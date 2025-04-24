@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef SOLOCRAFT_H
+#define SOLOCRAFT_H
+
 #include "solocraft/SoloCraftConfig.h"
 
 #include "Globals/ObjectMgr.h"
@@ -21,11 +24,10 @@ class Solocraft
         }
 
         bool Initialize();
+        void SetConfigFileName(const std::string& filename) { sSolocraftConfig.SetConfigFileName(filename); }
         void OnLogin(Player* player);
         void OnLogout(Player* player);
-        //void OnAddMember(Player* player);
         void OnMapChanged(Player* player);
-        //bool ChatFilter(Player* player, string text);
 
     private:
         SolocraftConfig sSolocraftConfig;
@@ -43,3 +45,5 @@ class Solocraft
 };
 
 #define sSolocraft MaNGOS::Singleton<Solocraft>::Instance()
+
+#endif

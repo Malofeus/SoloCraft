@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef SOLOCRAFT_CONFIG_H
+#define SOLOCRAFT_CONFIG_H
+
 #include "Config/Config.h"
 
 #include <unordered_map>
@@ -10,7 +13,10 @@ class SolocraftConfig
         SolocraftConfig();
  
         bool Initialize();
+        void SetConfigFileName(const std::string& filename) { m_configFileName = filename; }
 
+        std::string m_configFileName;
+        
         bool enabled;
         bool SoloCraftAnnounceModule;
         bool SoloCraftDebuffEnable;
@@ -38,3 +44,5 @@ class SolocraftConfig
 };
 
 // #define sSolocraftConfig MaNGOS::Singleton<SolocraftConfig>::Instance()
+
+#endif
