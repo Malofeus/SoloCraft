@@ -13,18 +13,13 @@ SolocraftConfig::SolocraftConfig():enabled(false) { }
 bool SolocraftConfig::Initialize()
 {
     sLog.outString("Initializing Solocraft.");
-    if (!config.SetSource(SYSCONFDIR"SoloCraft.conf", "SoloCraft_"))
+    if (!config.SetSource(m_configFileName, "SoloCraft_"))
     {
-#ifdef _SOLOCRAFT_CONFIG
-        if (!config.SetSource(_SOLOCRAFT_CONFIG, "SoloCraft_"))
+        if (!config.SetSource(SYSCONFDIR"SoloCraft.conf", "SoloCraft_"))
         {
             sLog.outString("Solocraft is Disabled. Unable to open configuration file solocreaft.conf");
             return false;
         }
-#else
-        sLog.outString("Solocraft is Disabled. Unable to open configuration file solocreaft.conf");
-        return false;
-#endif
     }
 
     enabled = config.GetBoolDefault("Solocraft.Enabled", false);
@@ -32,6 +27,10 @@ bool SolocraftConfig::Initialize()
     {
         sLog.outString("Solocraft is Disabled in SoloCraft.conf");
         return false;
+    }
+    else
+    {
+        sLog.outString("Solocraft is running.")
     }
 
     SoloCraftAnnounceModule = config.GetBoolDefault("Solocraft.Announce", true);
